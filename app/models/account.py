@@ -1,8 +1,6 @@
-from email.policy import default
-from datetime import datetime
-from dynamorm import DynaModel, GlobalIndex, ProjectAll
+from dynamorm import DynaModel
 
-from marshmallow import fields, validate, validates, ValidationError
+from marshmallow import fields, validate
 
 class Account(DynaModel):
     class Table:
@@ -11,8 +9,8 @@ class Account(DynaModel):
 
     class Schema:
         image_id = fields.String(validate=validate.Length(0,200))
-        date_created = fields.DateTime(default=datetime.now())
-        is_recurring = fields.Bool()
+        date_created = fields.String()
+        is_recurring = fields.Boolean(load_default=False)
         email_verified_at= fields.String(validate=validate.Length(0,200))
         first_name= fields.String(validate=validate.Length(0,200),default="Test")
         last_name= fields.String(validate=validate.Length(0,200),default="Test")
@@ -33,9 +31,9 @@ class Account(DynaModel):
         rating= fields.String(validate=validate.Length(0,200))
         state= fields.String(validate=validate.Length(0,200))
         country= fields.String(validate=validate.Length(0,200))
-        delete_flag = fields.Bool(default=False)
-        last_logged_in = fields.DateTime(default=datetime.now())
-        last_modified = fields.DateTime(default=datetime.now())
+        delete_flag = fields.Bool()
+        last_logged_in = fields.String()
+        last_modified = fields.String()
         bvn= fields.String(validate=validate.Length(0,14))
         pin= fields.String(validate=validate.Length(0,14))
         question_1= fields.String(validate=validate.Length(0,200))
@@ -45,12 +43,12 @@ class Account(DynaModel):
         answer_2= fields.String(validate=validate.Length(0,200))
         answer_3= fields.String(validate=validate.Length(0,200))
         docType= fields.String(validate=validate.Length(0,200))
-        last_login = fields.DateTime(default=datetime.now())
-        date_joined = fields.DateTime(default=datetime.now())
-        is_superuser = fields.Bool(default=False)
-        is_staff = fields.Bool(default=False) 
-        is_active = fields.Bool(default=False) 
+        last_login = fields.String()
+        date_joined = fields.String()
+        is_superuser = fields.Bool()
+        is_staff = fields.Bool() 
+        is_active = fields.Bool() 
         username= fields.String(validate=validate.Length(0,200),required=True)
         countryCode= fields.String(validate=validate.Length(0,200))
-        receive_notifications = fields.Bool(default=True)
+        receive_notifications = fields.Bool()
         date_of_birth= fields.String(validate=validate.Length(0,200))
