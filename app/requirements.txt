@@ -1,2 +1,4 @@
 flask
 aws-wsgi
+dynamorm
+marshmallow==3.15.0
