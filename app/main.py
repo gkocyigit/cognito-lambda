@@ -157,7 +157,9 @@ def create_account():
         #Save the account details in DynamoDB
         account.save()
 
-        return "User created"
+        return {
+            "success":True
+        }
     except PydanditValidationError as e:
         print(repr(e))
         traceback.print_tb(sys.exc_info()[2])
