@@ -8,18 +8,39 @@ Globals:
     Timeout: 3
 
 Resources:
-  HelloWorldFunction:
+  FlaskAPIFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: app/
       Handler: main.lambda_handler
       Runtime: python3.8
+      Environment:
+        Variables: 
+          COGNITO_USER_POOL_ID: eu-central-1_V0TkvDe3v
+          COGNITO_APP_CLIENT_ID: 75nouu1kqjhvqlbiiasd6dgpld
       Events:
         HelloWorld:
           Type: Api
           Properties:
             Path: /{proxy+}
             Method: any
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref AccountTable
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - cognito-idp:*
+              Resource: '*'
+
+  AccountTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey: 
+        Name: username
+        Type: String
+      TableName: account
 
 Outputs:
   HelloWorldApi:
