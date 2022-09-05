@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "cc72ab1a-c4f7-42f9-ade9-99bf08f663c3",
+		"name": "Cognito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20297201"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"me@gkocyigit.com\",\r\n    \"password\":\"Asdf1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"me@gkocyigit.com\",\r\n    \"password\":\"Asdf1234\",\r\n    \"image_id\" : \"image_id\",\r\n    \"email_verified_at\": \"email_verified_at\",\r\n    \"first_name\": \"first_name\",\r\n    \"last_name\": \"last_name\",\r\n    \"fullname\": \"fullname\",\r\n    \"phone_number\": \"phone_number\",\r\n    \"profile_type\": \"profile_type\",\r\n    \"balance\": \"balance\",\r\n    \"tenant_id\": \"tenant_id\",\r\n    \"promo_code\": \"promo_code\",\r\n    \"formatted_date\": \"formatted_date\",\r\n    \"account_number\": \"123456\",\r\n    \"father_name\": \"father_name\",\r\n    \"status\": \"status\",\r\n    \"address\": \"address\",\r\n    \"dob\": \"dob\",\r\n    \"city\": \"city\",\r\n    \"gender\": \"gender\",\r\n    \"rating\": \"rating\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"bvn\": \"bvn\",\r\n    \"pin\": \"pin\",\r\n    \"question_1\": \"question_1\",\r\n    \"question_2\": \"question_2\",\r\n    \"question_3\": \"question_3\",\r\n    \"answer_1\": \"answer_1\",\r\n    \"answer_2\": \"answer_2\",\r\n    \"answer_3\": \"answer_3\",\r\n    \"docType\": \"docType\",\r\n    \"last_login\" : \"last_login\",\r\n    \"countryCode\": \"countryCode\",\r\n    \"date_of_birth\": \"date_of_birth\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJLeHF4WWpMSWNTZTlUcUQ4M2dMZGJEaW5DRTdwSTVcL1YrbkVEa2JENkFodz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJlYzQxZDlmZS00OTYwLTQ2MzQtYTUzOS1jOGFjNDI3N2NjYzkiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuZXUtY2VudHJhbC0xLmFtYXpvbmF3cy5jb21cL2V1LWNlbnRyYWwtMV9WMFRrdkRlM3YiLCJjbGllbnRfaWQiOiI3NW5vdXUxa3FqaHZxbGJpaWFzZDZkZ3BsZCIsIm9yaWdpbl9qdGkiOiJhMzJkODg1NS0wZWNmLTQ3OTUtOWY4MS05OGVkN2RhMmJjNDUiLCJldmVudF9pZCI6Ijc3MGM0YzkzLTJhNzUtNDIxZi1iZmM4LTQ2ZTRkNTJmMGQ4NyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NjIzMjAyMzcsImV4cCI6MTY2MjMyMzgzNywiaWF0IjoxNjYyMzIwMjM3LCJqdGkiOiIwYjc3NDA4Mi02MjhjLTQ5ZWUtODQ5NS1hMThmOTNkYmU4ZGMiLCJ1c2VybmFtZSI6Im1lQGdrb2N5aWdpdC5jb20ifQ.d98PapTFmNDR1Q42wkD4ptPhN30QX7n5jV6dxKu_TKUUdrrDvZRKGOqWmztVQHB_XMcuudVv_9gk3Bzn14AzrweG4311agy4lpzmogYwxT30JGXyCg8MExzKG5MKBLsHkHO4FP5nKu0W6ELuQq82WUiOzFLYuCaR9ql5VLaEcFRVdhCwxtgJhxNcd-bhS8yP95TtPUgC_rrynuxEk8FJ7Phzps6OSFodO48K1TsDPCxaSM1bn4QFh4NXELt_moKhIhrQO3kSUEGe3uelIKYHMhRrxx2HoelN_t2IXSM9LGIbAYSR1wZwfh8b2Ic4gBJyen3RUz1g72tuvErkGI5F4g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/account-detail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"account-detail"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

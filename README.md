@@ -17,6 +17,8 @@ There are 3 endpoints:
 - POST /create : Creates the account in Cognito and creates account in DynamoDB with the given `data`
 - GET /account-detail: Authenticates the user from Cognito using `Authorization` header and returns the account details from DynamoDB
 
+Sample requests are added as a postman collection in `postman-collection.json` file
+
 ## Deploying
 
 ```
