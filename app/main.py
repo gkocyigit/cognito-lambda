@@ -10,7 +10,8 @@ import urllib.request
 from dotenv import load_dotenv
 from jose import jwk, jwt
 from jose.utils import base64url_decode
-from marshmallow import ValidationError
+from dynamorm.exceptions import ValidationError
+from pydantic.error_wrappers import ValidationError as PydanditValidationError
 from datetime import datetime
 from flask import (
     Flask,
@@ -42,6 +43,9 @@ def login():
     try:
         data = json.loads(request.data)
 
+        if "email" not in data or "password" not in data:
+            return (jsonify(message='Email or Password missing'),400)
+
         res=cognito_client.initiate_auth(
             AuthFlow='USER_PASSWORD_AUTH',
             AuthParameters={
@@ -70,7 +74,10 @@ def login():
         return {
             "token":token
         }
-
+    except cognito_client.exceptions.UserNotFoundException as e:
+        return (jsonify(message='User not found'),404)
+    except cognito_client.exceptions.NotAuthorizedException as e:
+        return (jsonify(message='Incorrect username or password'),400)
     except Exception as e:
         print(repr(e))
         traceback.print_tb(sys.exc_info()[2])
@@ -130,11 +137,11 @@ def create_account():
         )
 
         queryAccountRes=Account.query(username=data.username)
-        print(queryAccountRes)
+
         if queryAccountRes.count()>0:
             return (jsonify(message='User exists'),404)
 
-        res = cognito_client.admin_create_user(
+        cognito_client.admin_create_user(
             UserPoolId=userpool_id,
             Username=data.username,
             TemporaryPassword=data.password,
@@ -147,12 +154,14 @@ def create_account():
             MessageAction="SUPPRESS"
         )
 
-        print(res)
-
+        #Save the account details in DynamoDB
         account.save()
 
         return "User created"
-
+    except PydanditValidationError as e:
+        print(repr(e))
+        traceback.print_tb(sys.exc_info()[2])
+        return (jsonify(message='Request not valid'),404)
     except ValidationError as e:
         print(repr(e))
         traceback.print_tb(sys.exc_info()[2])
